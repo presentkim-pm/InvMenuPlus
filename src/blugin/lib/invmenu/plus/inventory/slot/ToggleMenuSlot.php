@@ -25,42 +25,33 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\plus\slot;
+namespace blugin\lib\invmenu\plus\inventory\slot;
 
+use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
-use pocketmine\inventory\BaseInventory;
 use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
+use pocketmine\Player;
 
-class SyncSlot implements ISlot{
-    /** @var BaseInventory */
-    protected $inventory;
+class ToggleMenuSlot extends ImmutableSlot{
+    protected $menu;
 
-    /** @var int */
-    protected $slot;
-
-    public function __construct(BaseInventory $inventory, int $slot){
-        $this->inventory = $inventory;
-        $this->slot = $slot;
+    public function __construct(Item $item, InvMenu $menu){
+        parent::__construct($item);
+        $this->menu = $menu;
     }
 
     public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return $event->continue();
+        $event->getPlayer()->removeWindow($event->getInventory());
+        return $event->discard()->then(function(Player $player) : void{
+            $this->getMenu()->send($player);
+        });
     }
 
-    public function getItem() : ?Item{
-        return $this->inventory->getItem($this->slot);
+    public function getMenu() : InvMenu{
+        return $this->menu;
     }
 
-    public function setItem(?Item $item) : void{
-        $this->inventory->setItem($this->slot, $item ?? ItemFactory::get(Item::AIR, 0, 0));
-    }
-
-    public function getInventory() : BaseInventory{
-        return $this->inventory;
-    }
-
-    public function getSlot() : int{
-        return $this->slot;
+    public function setMenu(InvMenu $menu) : void{
+        $this->menu = $menu;
     }
 }

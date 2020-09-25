@@ -25,33 +25,15 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\plus\slot;
+namespace blugin\lib\invmenu\plus\inventory\slot;
 
-use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\item\Item;
-use pocketmine\Player;
 
-class ToggleMenuSlot extends ImmutableSlot{
-    protected $menu;
+interface ISlot{
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult;
 
-    public function __construct(Item $item, InvMenu $menu){
-        parent::__construct($item);
-        $this->menu = $menu;
-    }
+    public function getItem() : ?Item;
 
-    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        $event->getPlayer()->removeWindow($event->getInventory());
-        return $event->discard()->then(function(Player $player) : void{
-            $this->getMenu()->send($player);
-        });
-    }
-
-    public function getMenu() : InvMenu{
-        return $this->menu;
-    }
-
-    public function setMenu(InvMenu $menu) : void{
-        $this->menu = $menu;
-    }
+    public function setItem(?Item $item) : void;
 }

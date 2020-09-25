@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\plus\slot\SlotTransactionEvent;
+use blugin\lib\invmenu\plus\inventory\slot\SlotTransactionEvent;
 use blugin\traits\singleton\SingletonTrait;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketReceiveEvent;

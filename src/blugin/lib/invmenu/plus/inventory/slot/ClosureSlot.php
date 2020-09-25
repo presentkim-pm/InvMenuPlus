@@ -25,12 +25,21 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\plus\slot;
+namespace blugin\lib\invmenu\plus\inventory\slot;
 
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use pocketmine\item\Item;
 
-class OneWaySyncSlot extends SyncSlot{
+class ClosureSlot extends NormalItemSlot{
+    /** @var \Closure */
+    protected $closure;
+
+    public function __construct(Item $item, \Closure $closure){
+        parent::__construct($item);
+        $this->closure = $closure;
+    }
+
     public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return $event->discard();
+        return ($this->closure)($event)();
     }
 }

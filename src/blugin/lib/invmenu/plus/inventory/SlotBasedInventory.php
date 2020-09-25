@@ -28,8 +28,8 @@ declare(strict_types=1);
 namespace blugin\lib\invmenu\plus\inventory;
 
 use blugin\lib\invmenu\plus\InvMenuPlusEventHandler;
-use blugin\lib\invmenu\plus\slot\ISlot;
-use blugin\lib\invmenu\plus\slot\SlotTransactionEvent;
+use blugin\lib\invmenu\plus\inventory\slot\ISlot;
+use blugin\lib\invmenu\plus\inventory\slot\SlotTransactionEvent;
 use muqsit\invmenu\inventory\InvMenuInventory;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\metadata\MenuMetadata;
