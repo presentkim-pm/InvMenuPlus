@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace blugin\lib\invmenu\plus\slot;
 
-use blugin\lib\invmenu\plus\InvMenuPlusInventory;
+use blugin\lib\invmenu\plus\inventory\InvMenuPlusInventory;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;

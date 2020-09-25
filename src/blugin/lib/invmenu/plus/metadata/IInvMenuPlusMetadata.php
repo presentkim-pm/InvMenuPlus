@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace blugin\lib\invmenu\plus\metadata;
 
-use blugin\lib\invmenu\plus\InvMenuPlusInventory;
+use blugin\lib\invmenu\plus\inventory\InvMenuPlusInventory;
 use muqsit\invmenu\inventory\InvMenuInventory;
 
 interface IInvMenuPlusMetadata{
