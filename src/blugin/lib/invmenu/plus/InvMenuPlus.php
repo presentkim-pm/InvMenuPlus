@@ -25,16 +25,23 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\plus\metadata;
+namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\plus\inventory\InvMenuPlusInventory;
 use muqsit\invmenu\inventory\InvMenuInventory;
-use muqsit\invmenu\metadata\MenuMetadata;
+use muqsit\invmenu\InvMenu;
+use muqsit\invmenu\InvMenuHandler;
 
-trait InvMenuPluginMetadataTrait{
-    /** @return InvMenuPlusInventory */
-    public function createInventory() : InvMenuInventory{
-        /** @var $this MenuMetadata */
-        return new InvMenuPlusInventory($this);
+class InvMenuPlus extends InvMenu{
+    /** @return InvMenuPlus */
+    public static function create(string $identifier, ?string $inventoryClass = null) : InvMenu{
+        $menu = new InvMenuPlus($type = InvMenuHandler::getMenuType($identifier));
+        if($inventoryClass !== null && is_a($inventoryClass, InvMenuInventory::class, true)){
+            $menu->setInventory(new $inventoryClass($type));
+        }
+        return $menu;
+    }
+
+    public function setInventory(InvMenuInventory $inventory) : void{
+        $this->inventory = $inventory;
     }
 }
