@@ -25,12 +25,21 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\metadata;
+namespace blugin\lib\invmenu\plus\slot;
 
-use blugin\lib\invmenu\responsive\ResponsiveInvMenuInventory;
-use muqsit\invmenu\inventory\InvMenuInventory;
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use pocketmine\item\Item;
 
-interface IResponsiveMenuMetadata{
-    /** @return ResponsiveInvMenuInventory */
-    public function createInventory() : InvMenuInventory;
+class ClosureSlot extends NormalItemSlot{
+    /** @var \Closure */
+    protected $closure;
+
+    public function __construct(Item $item, \Closure $closure){
+        parent::__construct($item);
+        $this->closure = $closure;
+    }
+
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
+        return ($this->closure)($event)();
+    }
 }

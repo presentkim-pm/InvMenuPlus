@@ -25,21 +25,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\slot;
+namespace blugin\lib\invmenu\plus\metadata;
 
-use muqsit\invmenu\transaction\InvMenuTransactionResult;
-use pocketmine\item\Item;
+use muqsit\invmenu\metadata\SingleBlockMenuMetadata;
 
-class ClosureSlot extends NormalItemSlot{
-    /** @var \Closure */
-    protected $closure;
-
-    public function __construct(Item $item, \Closure $closure){
-        parent::__construct($item);
-        $this->closure = $closure;
-    }
-
-    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return ($this->closure)($event)();
-    }
+class SingleBlockInvMenuPlusPlusMetadata extends SingleBlockMenuMetadata implements IInvMenuPlusMetadata{
+    use InvMenuPluginMetadataTrait;
 }

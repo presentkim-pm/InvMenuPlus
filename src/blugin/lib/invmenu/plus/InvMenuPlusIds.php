@@ -25,17 +25,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\slot;
+namespace blugin\lib\invmenu\plus;
 
-use muqsit\invmenu\transaction\InvMenuTransactionResult;
-use pocketmine\item\Item;
-
-abstract class ResponsiveSlot{
-    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return $event->continue();
-    }
-
-    abstract public function getItem() : ?Item;
-
-    abstract public function setItem(?Item $item) : void;
+interface InvMenuPlusIds{
+    public const TYPE_CHEST = "invmenuplus:chest";
+    public const TYPE_DOUBLE_CHEST = "invmenuplugs:double_chest";
+    public const TYPE_HOPPER = "invmenuplus:hopper";
 }

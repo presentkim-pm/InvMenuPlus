@@ -25,10 +25,12 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive;
+namespace blugin\lib\invmenu\plus\metadata;
 
-interface ResponsiveMenuIds{
-    public const TYPE_CHEST = "responsiveinvmenu:chest";
-    public const TYPE_DOUBLE_CHEST = "responsiveinvmenu:double_chest";
-    public const TYPE_HOPPER = "responsiveinvmenu:hopper";
+use blugin\lib\invmenu\plus\InvMenuPlusInventory;
+use muqsit\invmenu\inventory\InvMenuInventory;
+
+interface IInvMenuPlusMetadata{
+    /** @return InvMenuPlusInventory */
+    public function createInventory() : InvMenuInventory;
 }

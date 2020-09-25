@@ -25,16 +25,17 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\metadata;
+namespace blugin\lib\invmenu\plus\slot;
 
-use blugin\lib\invmenu\responsive\ResponsiveInvMenuInventory;
-use muqsit\invmenu\inventory\InvMenuInventory;
-use muqsit\invmenu\metadata\MenuMetadata;
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use pocketmine\item\Item;
 
-trait ResponsiveMenuMetadataTrait{
-    /** @return ResponsiveInvMenuInventory */
-    public function createInventory() : InvMenuInventory{
-        /** @var $this MenuMetadata */
-        return new ResponsiveInvMenuInventory($this);
+abstract class Slot{
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
+        return $event->continue();
     }
+
+    abstract public function getItem() : ?Item;
+
+    abstract public function setItem(?Item $item) : void;
 }

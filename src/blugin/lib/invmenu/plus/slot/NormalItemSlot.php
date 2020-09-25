@@ -25,10 +25,24 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\metadata;
+namespace blugin\lib\invmenu\plus\slot;
 
-use muqsit\invmenu\metadata\SingleBlockMenuMetadata;
+use pocketmine\item\Item;
+use pocketmine\item\ItemFactory;
 
-class SingleBlockResponsiveMenuMetadata extends SingleBlockMenuMetadata implements IResponsiveMenuMetadata{
-    use ResponsiveMenuMetadataTrait;
+class NormalItemSlot extends Slot{
+    /** @var Item */
+    protected $item;
+
+    public function __construct(Item $item){
+        $this->item = $item;
+    }
+
+    public function getItem() : ?Item{
+        return $this->item;
+    }
+
+    public function setItem(?Item $item) : void{
+        $this->item = $item ?? ItemFactory::get(Item::AIR, 0, 0);
+    }
 }

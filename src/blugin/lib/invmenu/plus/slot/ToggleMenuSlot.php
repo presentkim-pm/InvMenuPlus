@@ -25,24 +25,33 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\slot;
+namespace blugin\lib\invmenu\plus\slot;
 
+use muqsit\invmenu\InvMenu;
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
+use pocketmine\Player;
 
-class NormalItemSlot extends ResponsiveSlot{
-    /** @var Item */
-    protected $item;
+class ToggleMenuSlot extends ImmutableSlot{
+    protected $menu;
 
-    public function __construct(Item $item){
-        $this->item = $item;
+    public function __construct(Item $item, InvMenu $menu){
+        parent::__construct($item);
+        $this->menu = $menu;
     }
 
-    public function getItem() : ?Item{
-        return $this->item;
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
+        $event->getPlayer()->removeWindow($event->getInventory());
+        return $event->discard()->then(function(Player $player) : void{
+            $this->getMenu()->send($player);
+        });
     }
 
-    public function setItem(?Item $item) : void{
-        $this->item = $item ?? ItemFactory::get(Item::AIR, 0, 0);
+    public function getMenu() : InvMenu{
+        return $this->menu;
+    }
+
+    public function setMenu(InvMenu $menu) : void{
+        $this->menu = $menu;
     }
 }

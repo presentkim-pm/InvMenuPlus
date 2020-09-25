@@ -25,10 +25,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive;
+namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\responsive\metadata\DoubleBlockResponsiveMenuMetadata;
-use blugin\lib\invmenu\responsive\metadata\SingleBlockResponsiveMenuMetadata;
+use blugin\lib\invmenu\plus\metadata\DoubleBlockInvMenuPlusMetadata;
+use blugin\lib\invmenu\plus\metadata\SingleBlockInvMenuPlusPlusMetadata;
 use muqsit\invmenu\InvMenuHandler;
 use pocketmine\block\BlockFactory;
 use pocketmine\block\BlockIds;
@@ -37,7 +37,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\tile\Tile;
 
-class ResponsiveInvMenuHandler implements ResponsiveMenuIds{
+class InvMenuPlusPlusHandler implements InvMenuPlusIds{
     /** @var bool */
     private static $registered = false;
 
@@ -53,10 +53,10 @@ class ResponsiveInvMenuHandler implements ResponsiveMenuIds{
         if(self::isRegistered())
             return;
 
-        InvMenuHandler::registerMenuType(new SingleBlockResponsiveMenuMetadata(self::TYPE_CHEST, 27, WindowTypes::CONTAINER, BlockFactory::get(BlockIds::CHEST), Tile::CHEST));
-        InvMenuHandler::registerMenuType(new DoubleBlockResponsiveMenuMetadata(self::TYPE_DOUBLE_CHEST, 54, WindowTypes::CONTAINER, BlockFactory::get(BlockIds::CHEST), Tile::CHEST));
-        InvMenuHandler::registerMenuType(new SingleBlockResponsiveMenuMetadata(self::TYPE_HOPPER, 5, WindowTypes::HOPPER, BlockFactory::get(BlockIds::HOPPER_BLOCK), "Hopper"));
+        InvMenuHandler::registerMenuType(new SingleBlockInvMenuPlusPlusMetadata(self::TYPE_CHEST, 27, WindowTypes::CONTAINER, BlockFactory::get(BlockIds::CHEST), Tile::CHEST));
+        InvMenuHandler::registerMenuType(new DoubleBlockInvMenuPlusMetadata(self::TYPE_DOUBLE_CHEST, 54, WindowTypes::CONTAINER, BlockFactory::get(BlockIds::CHEST), Tile::CHEST));
+        InvMenuHandler::registerMenuType(new SingleBlockInvMenuPlusPlusMetadata(self::TYPE_HOPPER, 5, WindowTypes::HOPPER, BlockFactory::get(BlockIds::HOPPER_BLOCK), "Hopper"));
 
-        Server::getInstance()->getPluginManager()->registerEvents(ResponsiveInvMenuEventHandler::getInstance(), $plugin);
+        Server::getInstance()->getPluginManager()->registerEvents(InvMenuPlusEventHandler::getInstance(), $plugin);
     }
 }

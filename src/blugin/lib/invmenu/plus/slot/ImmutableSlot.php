@@ -25,10 +25,12 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\metadata;
+namespace blugin\lib\invmenu\plus\slot;
 
-use muqsit\invmenu\metadata\DoubleBlockMenuMetadata;
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
 
-class DoubleBlockResponsiveMenuMetadata extends DoubleBlockMenuMetadata implements IResponsiveMenuMetadata{
-    use ResponsiveMenuMetadataTrait;
+class ImmutableSlot extends NormalItemSlot{
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
+        return $event->discard();
+    }
 }

@@ -25,16 +25,16 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive;
+namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\responsive\slot\SlotTransactionEvent;
+use blugin\lib\invmenu\plus\slot\SlotTransactionEvent;
 use blugin\traits\singleton\SingletonTrait;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\mcpe\protocol\ContainerClosePacket;
 
-class ResponsiveInvMenuEventHandler implements Listener{
+class InvMenuPlusEventHandler implements Listener{
     use SingletonTrait;
 
     /** @var bool */

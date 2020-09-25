@@ -25,10 +25,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive;
+namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\responsive\slot\ResponsiveSlot;
-use blugin\lib\invmenu\responsive\slot\SlotTransactionEvent;
+use blugin\lib\invmenu\plus\slot\Slot;
+use blugin\lib\invmenu\plus\slot\SlotTransactionEvent;
 use muqsit\invmenu\inventory\InvMenuInventory;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\metadata\MenuMetadata;
@@ -36,29 +36,29 @@ use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\network\mcpe\protocol\types\ContainerIds;
 
-class ResponsiveInvMenuInventory extends InvMenuInventory{
+class InvMenuPlusInventory extends InvMenuInventory{
     /** @var InvMenu|null */
     protected $bindedMenu = null;
 
     public function __construct(MenuMetadata $menu_metadata){
         parent::__construct($menu_metadata);
-        $this->slots = new ResponsiveSlotList($this->getSize());
+        $this->slots = new InvMenuPlusInventoryArray($this->getSize());
     }
 
-    public function getSlotList() : ResponsiveSlotList{
+    public function getSlotList() : InvMenuPlusInventoryArray{
         return $this->slots;
     }
 
-    /** @return ResponsiveSlot[] */
+    /** @return Slot[] */
     public function getAllSlot() : array{
         return $this->slots->getAll();
     }
 
-    public function getSlot(int $index) : ?ResponsiveSlot{
+    public function getSlot(int $index) : ?Slot{
         return $this->slots->get($index);
     }
 
-    public function setSlot(int $index, ResponsiveSlot $slot) : void{
+    public function setSlot(int $index, Slot $slot) : void{
         $this->slots[$index] = $slot;
     }
 
@@ -81,7 +81,7 @@ class ResponsiveInvMenuInventory extends InvMenuInventory{
                         $event->setCloseListener($callback);
                     }
                 }
-                ResponsiveInvMenuEventHandler::getInstance()->pending($event);
+                InvMenuPlusEventHandler::getInstance()->pending($event);
 
                 if($result->isCancelled()){
                     $player->getCursorInventory()->sendSlot(0, $player);

@@ -25,20 +25,20 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive;
+namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\responsive\slot\NormalItemSlot;
-use blugin\lib\invmenu\responsive\slot\ResponsiveSlot;
+use blugin\lib\invmenu\plus\slot\NormalItemSlot;
+use blugin\lib\invmenu\plus\slot\Slot;
 use pocketmine\item\Item;
 
-class ResponsiveSlotList extends \SplFixedArray{
+class InvMenuPlusInventoryArray extends \SplFixedArray{
     public function offsetGet($offset) : ?Item{
-        return ($value = parent::offsetGet($offset)) instanceof ResponsiveSlot ? $value->getItem() : $value;
+        return ($value = parent::offsetGet($offset)) instanceof Slot ? $value->getItem() : $value;
     }
 
     public function offsetSet($offset, $value) : void{
         $before = parent::offsetGet($offset);
-        if($before instanceof ResponsiveSlot && !$value instanceof ResponsiveSlot){
+        if($before instanceof Slot && !$value instanceof Slot){
             $before->setItem($value);
             return;
         }elseif($value instanceof Item){
@@ -51,7 +51,7 @@ class ResponsiveSlotList extends \SplFixedArray{
         return $this[$this->key()];
     }
 
-    public function get(int $offset) : ?ResponsiveSlot{
+    public function get(int $offset) : ?Slot{
         return parent::offsetGet($offset);
     }
 

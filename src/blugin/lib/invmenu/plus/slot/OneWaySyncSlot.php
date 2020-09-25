@@ -25,11 +25,11 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\slot;
+namespace blugin\lib\invmenu\plus\slot;
 
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 
-class ImmutableSlot extends NormalItemSlot{
+class OneWaySyncSlot extends SyncSlot{
     public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
         return $event->discard();
     }

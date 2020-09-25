@@ -25,12 +25,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\slot;
+namespace blugin\lib\invmenu\plus\metadata;
 
-use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use muqsit\invmenu\metadata\DoubleBlockMenuMetadata;
 
-class OneWaySyncSlot extends SyncSlot{
-    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return $event->discard();
-    }
+class DoubleBlockInvMenuPlusMetadata extends DoubleBlockMenuMetadata implements IInvMenuPlusMetadata{
+    use InvMenuPluginMetadataTrait;
 }

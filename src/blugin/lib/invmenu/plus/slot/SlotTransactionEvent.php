@@ -25,9 +25,9 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\responsive\slot;
+namespace blugin\lib\invmenu\plus\slot;
 
-use blugin\lib\invmenu\responsive\ResponsiveInvMenuInventory;
+use blugin\lib\invmenu\plus\InvMenuPlusInventory;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
@@ -45,7 +45,7 @@ class SlotTransactionEvent{
     /** @var SlotChangeAction */
     protected $action;
 
-    /** @var ResponsiveInvMenuInventory */
+    /** @var InvMenuPlusInventory */
     protected $inventory;
 
     /** @var InvMenu */
@@ -57,7 +57,7 @@ class SlotTransactionEvent{
     /** @var \Closure|null */
     private $closeListener = null;
 
-    public function __construct(InvMenuTransaction $transaction, ResponsiveInvMenuInventory $inventory, InvMenu $menu){
+    public function __construct(InvMenuTransaction $transaction, InvMenuPlusInventory $inventory, InvMenu $menu){
         $this->transaction = $transaction;
         $this->player = $transaction->getPlayer();
         $this->action = $transaction->getAction();
@@ -79,7 +79,7 @@ class SlotTransactionEvent{
         return $this->action;
     }
 
-    public function getInventory() : ResponsiveInvMenuInventory{
+    public function getInventory() : InvMenuPlusInventory{
         return $this->inventory;
     }
 
