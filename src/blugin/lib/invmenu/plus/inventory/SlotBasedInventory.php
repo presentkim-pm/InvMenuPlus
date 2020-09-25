@@ -37,16 +37,16 @@ use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\network\mcpe\protocol\types\ContainerIds;
 
-class InvMenuPlusInventory extends InvMenuInventory{
+class SlotBasedInventory extends InvMenuInventory{
     /** @var InvMenu|null */
     protected $bindedMenu = null;
 
     public function __construct(MenuMetadata $menu_metadata){
         parent::__construct($menu_metadata);
-        $this->slots = new InvMenuPlusInventoryArray($this->getSize());
+        $this->slots = new SlotBasedItemArray($this->getSize());
     }
 
-    public function getSlotList() : InvMenuPlusInventoryArray{
+    public function getSlotList() : SlotBasedItemArray{
         return $this->slots;
     }
 

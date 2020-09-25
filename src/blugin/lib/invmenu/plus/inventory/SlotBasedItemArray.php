@@ -31,7 +31,7 @@ use blugin\lib\invmenu\plus\slot\ISlot;
 use blugin\lib\invmenu\plus\slot\NormalItemSlot;
 use pocketmine\item\Item;
 
-class InvMenuPlusInventoryArray extends \SplFixedArray{
+class SlotBasedItemArray extends \SplFixedArray{
     public function offsetGet($offset) : ?Item{
         return ($value = parent::offsetGet($offset)) instanceof ISlot ? $value->getItem() : $value;
     }
