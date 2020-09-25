@@ -28,7 +28,7 @@ declare(strict_types=1);
 namespace blugin\lib\invmenu\plus\inventory;
 
 use blugin\lib\invmenu\plus\inventory\slot\ISlot;
-use blugin\lib\invmenu\plus\inventory\slot\NormalItemSlot;
+use blugin\lib\invmenu\plus\inventory\slot\defaults\NormalItemSlot;
 use pocketmine\item\Item;
 
 class SlotBasedItemArray extends \SplFixedArray{

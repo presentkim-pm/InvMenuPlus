@@ -25,8 +25,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\plus\inventory\slot;
+namespace blugin\lib\invmenu\plus\inventory\slot\defaults;
 
+use blugin\lib\invmenu\plus\inventory\slot\ISlot;
+use blugin\lib\invmenu\plus\inventory\slot\SlotTransactionEvent;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\inventory\BaseInventory;
 use pocketmine\item\Item;

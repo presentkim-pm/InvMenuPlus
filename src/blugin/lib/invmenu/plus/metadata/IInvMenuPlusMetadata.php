@@ -31,6 +31,6 @@ use blugin\lib\invmenu\plus\inventory\InvMenuPlusInventory;
 use muqsit\invmenu\inventory\InvMenuInventory;
 
 interface IInvMenuPlusMetadata{
-    /** @return InvMenuPlusInventory */
+    /** @return InvMenuPlusInventory\ */
     public function createInventory() : InvMenuInventory;
 }

@@ -25,12 +25,34 @@
 
 declare(strict_types=1);
 
-namespace blugin\lib\invmenu\plus\inventory\slot;
+namespace blugin\lib\invmenu\plus\inventory\slot\defaults;
 
+use blugin\lib\invmenu\plus\inventory\slot\SlotTransactionEvent;
+use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use pocketmine\item\Item;
+use pocketmine\Player;
 
-class OneWaySyncSlot extends SyncSlot{
+class ToggleMenuSlot extends ImmutableSlot{
+    protected $menu;
+
+    public function __construct(Item $item, InvMenu $menu){
+        parent::__construct($item);
+        $this->menu = $menu;
+    }
+
     public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return $event->discard();
+        $event->getPlayer()->removeWindow($event->getInventory());
+        return $event->discard()->then(function(Player $player) : void{
+            $this->getMenu()->send($player);
+        });
+    }
+
+    public function getMenu() : InvMenu{
+        return $this->menu;
+    }
+
+    public function setMenu(InvMenu $menu) : void{
+        $this->menu = $menu;
     }
 }
