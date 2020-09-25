@@ -37,7 +37,11 @@ use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\tile\Tile;
 
-class InvMenuPlusPlusHandler implements InvMenuPlusIds{
+class InvMenuPlusPlusHandler{
+    public const TYPE_CHEST = "invmenuplus:chest";
+    public const TYPE_DOUBLE_CHEST = "invmenuplugs:double_chest";
+    public const TYPE_HOPPER = "invmenuplus:hopper";
+
     /** @var bool */
     private static $registered = false;
 
