@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace blugin\lib\invmenu\plus;
 
-use blugin\lib\invmenu\plus\slot\Slot;
+use blugin\lib\invmenu\plus\slot\ISlot;
 use blugin\lib\invmenu\plus\slot\SlotTransactionEvent;
 use muqsit\invmenu\inventory\InvMenuInventory;
 use muqsit\invmenu\InvMenu;
@@ -49,16 +49,16 @@ class InvMenuPlusInventory extends InvMenuInventory{
         return $this->slots;
     }
 
-    /** @return Slot[] */
+    /** @return ISlot[] */
     public function getAllSlot() : array{
         return $this->slots->getAll();
     }
 
-    public function getSlot(int $index) : ?Slot{
+    public function getSlot(int $index) : ?ISlot{
         return $this->slots->get($index);
     }
 
-    public function setSlot(int $index, Slot $slot) : void{
+    public function setSlot(int $index, ISlot $slot) : void{
         $this->slots[$index] = $slot;
     }
 

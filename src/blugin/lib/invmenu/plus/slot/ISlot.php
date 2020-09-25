@@ -30,12 +30,10 @@ namespace blugin\lib\invmenu\plus\slot;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\item\Item;
 
-abstract class Slot{
-    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
-        return $event->continue();
-    }
+interface ISlot{
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult;
 
-    abstract public function getItem() : ?Item;
+    public function getItem() : ?Item;
 
-    abstract public function setItem(?Item $item) : void;
+    public function setItem(?Item $item) : void;
 }

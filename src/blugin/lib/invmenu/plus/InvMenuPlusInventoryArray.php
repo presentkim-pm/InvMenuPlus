@@ -28,17 +28,17 @@ declare(strict_types=1);
 namespace blugin\lib\invmenu\plus;
 
 use blugin\lib\invmenu\plus\slot\NormalItemSlot;
-use blugin\lib\invmenu\plus\slot\Slot;
+use blugin\lib\invmenu\plus\slot\ISlot;
 use pocketmine\item\Item;
 
 class InvMenuPlusInventoryArray extends \SplFixedArray{
     public function offsetGet($offset) : ?Item{
-        return ($value = parent::offsetGet($offset)) instanceof Slot ? $value->getItem() : $value;
+        return ($value = parent::offsetGet($offset)) instanceof ISlot ? $value->getItem() : $value;
     }
 
     public function offsetSet($offset, $value) : void{
         $before = parent::offsetGet($offset);
-        if($before instanceof Slot && !$value instanceof Slot){
+        if($before instanceof ISlot && !$value instanceof ISlot){
             $before->setItem($value);
             return;
         }elseif($value instanceof Item){
@@ -51,7 +51,7 @@ class InvMenuPlusInventoryArray extends \SplFixedArray{
         return $this[$this->key()];
     }
 
-    public function get(int $offset) : ?Slot{
+    public function get(int $offset) : ?ISlot{
         return parent::offsetGet($offset);
     }
 

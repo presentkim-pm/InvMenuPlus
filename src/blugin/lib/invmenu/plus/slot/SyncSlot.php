@@ -27,11 +27,12 @@ declare(strict_types=1);
 
 namespace blugin\lib\invmenu\plus\slot;
 
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\inventory\BaseInventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 
-class SyncSlot extends Slot{
+class SyncSlot implements ISlot{
     /** @var BaseInventory */
     protected $inventory;
 
@@ -41,6 +42,10 @@ class SyncSlot extends Slot{
     public function __construct(BaseInventory $inventory, int $slot){
         $this->inventory = $inventory;
         $this->slot = $slot;
+    }
+
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
+        return $event->continue();
     }
 
     public function getItem() : ?Item{

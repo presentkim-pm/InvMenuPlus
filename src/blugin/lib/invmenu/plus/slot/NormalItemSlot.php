@@ -27,15 +27,20 @@ declare(strict_types=1);
 
 namespace blugin\lib\invmenu\plus\slot;
 
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 
-class NormalItemSlot extends Slot{
+class NormalItemSlot implements ISlot{
     /** @var Item */
     protected $item;
 
     public function __construct(Item $item){
         $this->item = $item;
+    }
+
+    public function handleTransaction(SlotTransactionEvent $event) : InvMenuTransactionResult{
+        return $event->continue();
     }
 
     public function getItem() : ?Item{
